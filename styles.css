@@ -67,6 +67,47 @@ body {
     color: #666;
 }
 
+/* Booking Form */
+.booking-form {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.booking-form label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.booking-form input,
+.booking-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.booking-form button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #111;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.booking-form button:hover {
+    background-color: #333;
+}
+
 @media (max-width: 768px) {
     .thumbnail {
         width: 45%;
