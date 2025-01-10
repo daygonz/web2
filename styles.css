@@ -17,15 +17,15 @@ body {
 .main-heading {
     font-size: 48px;
     font-weight: bold;
-    margin: 20px 0 20px;
+    margin: 10px 0 10px;
     color: #111;
 }
 
 .subheading {
     font-size: 24px;
     font-weight: 300;
-    margin: 40px 0 30px; /* Increased margin bottom for more space between subheading and thumbnails */
-    margin-bottom: 80px; /* Increased margin-bottom for more space between subheading and thumbnails */
+    margin: 10px 0 10px; /* Increased margin bottom for more space between subheading and thumbnails */
+    margin-bottom: 10px; /* Increased margin-bottom for more space between subheading and thumbnails */
     color: #555;
 }
 
@@ -33,7 +33,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
-    margin-top: 60px; /* Optionally add a margin top to create more space between subheading and thumbnails */
+    margin-top: 10px; /* Optionally add a margin top to create more space between subheading and thumbnails */
 
 }
 
