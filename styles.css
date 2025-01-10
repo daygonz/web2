@@ -29,9 +29,8 @@ body {
 }
 
 .thumbnails {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
@@ -39,7 +38,6 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 22%;
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
@@ -62,13 +60,13 @@ body {
 }
 
 @media (max-width: 768px) {
-    .thumbnail {
-        width: 45%;
+    .thumbnails {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 480px) {
-    .thumbnail {
-        width: 100%;
+    .thumbnails {
+        grid-template-columns: 1fr;
     }
 }
