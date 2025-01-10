@@ -32,7 +32,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
-    margin-top: 20px; /* Optionally add a margin top to create more space between subheading and thumbnails */
+    margin-top: 40px; /* Optionally add a margin top to create more space between subheading and thumbnails */
 
 }
 
