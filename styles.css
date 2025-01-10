@@ -25,7 +25,7 @@ body {
 .subheading {
     font-size: 24px;
     font-weight: 300;
-    margin: 20px 0 40px; /* Increased margin-top and margin-bottom to create more space */
+    margin: 20px 0 80px; /* Increased margin-top and margin-bottom to create more space */
     color: #555;
     text-align: left; /* Left align the subheading */
 }
