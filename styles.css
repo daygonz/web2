@@ -15,7 +15,7 @@ body {
 }
 
 .main-heading {
-    font-size: 72px;
+    font-size: 128px;
     font-weight: bold;
     margin: 30px 0 20px; /* Increased margin-bottom for more space between heading and subheading */
     color: #111;
