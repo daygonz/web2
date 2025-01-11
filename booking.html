@@ -34,6 +34,52 @@
             margin-bottom: 20px;
         }
 
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .carousel-image {
+            min-width: 300px;
+            height: 300px;
+            margin: 0 10px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
         .booking-form {
             background-color: white;
             padding: 20px;
@@ -83,18 +129,29 @@
         <h1 class="main-heading">Book Your Promo Space</h1>
         <p class="subheading">Fill out the form to secure your spot for promotion.</p>
 
+        <!-- Image Carousel -->
+        <div class="carousel-container">
+            <button class="carousel-btn prev" id="prev-btn">&#10094;</button>
+            <div class="carousel">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 1" class="carousel-image">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 2" class="carousel-image">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 3" class="carousel-image">
+            </div>
+            <button class="carousel-btn next" id="next-btn">&#10095;</button>
+        </div>
+
         <!-- Booking Form -->
         <form class="booking-form">
             <!-- Name -->
             <div class="form-section">
-                <label for="name">Your Social Media Handle:</label>
-                <input type="text" id="name" name="name" required placeholder="@handle">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
             </div>
 
             <!-- Email -->
             <div class="form-section">
                 <label for="email">Your Email:</label>
-                <input type="email" id="email" name="email" required placeholder="email@email.com">
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
             </div>
 
             <!-- Promo Date -->
@@ -105,8 +162,8 @@
 
             <!-- Additional Message -->
             <div class="form-section">
-                <label for="message">What are you promoting?</label>
-                <textarea id="message" name="message" placeholder="I would like to promote my..."></textarea>
+                <label for="message">Additional Message (Optional):</label>
+                <textarea id="message" name="message" placeholder="Any special requests or notes?"></textarea>
             </div>
 
             <!-- Upload Images -->
@@ -124,12 +181,38 @@
 
             <!-- Total Price -->
             <div class="form-section total-price">
-                <h4>Total Price: $50</h4>
+                <h4>Total Price: $500</h4>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit">Request booking</button>
+            <button type="submit">Book Now</button>
         </form>
     </div>
+
+    <!-- JavaScript for carousel functionality -->
+    <script>
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const carousel = document.querySelector('.carousel');
+        const imageWidth = 320; // Width of each image (300px + 20px margin)
+
+        let scrollPosition = 0;
+
+        prevBtn.addEventListener('click', () => {
+            scrollPosition -= imageWidth;
+            if (scrollPosition < 0) {
+                scrollPosition = carousel.scrollWidth - carousel.offsetWidth;
+            }
+            carousel.style.transform = `translateX(-${scrollPosition}px)`;
+        });
+
+        nextBtn.addEventListener('click', () => {
+            scrollPosition += imageWidth;
+            if (scrollPosition >= carousel.scrollWidth) {
+                scrollPosition = 0;
+            }
+            carousel.style.transform = `translateX(-${scrollPosition}px)`;
+        });
+    </script>
 </body>
 </html>
