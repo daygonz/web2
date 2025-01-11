@@ -5,6 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Book Promo Space</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main-heading {
+            font-size: 36px;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .subheading {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Horizontal Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 30px auto;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carousel img {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Promo Space Description */
+        .promo-description {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .promo-description h2 {
+            font-size: 24px;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        .promo-description p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background-color: white;
+            padding: 20px;
+            margin: 30px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 600px;
+        }
+
+        .booking-form label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .booking-form input,
+        .booking-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .booking-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #111;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .booking-form button:hover {
+            background-color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carousel img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -15,10 +154,12 @@
         <!-- Image Carousel -->
         <div class="carousel-container">
             <button class="carousel-btn prev" id="prev-btn">&#10094;</button>
-            <div class="carousel">
-                <img src="https://via.placeholder.com/600x300" alt="Promo Space 1" class="carousel-image">
-                <img src="https://via.placeholder.com/600x300" alt="Promo Space 2" class="carousel-image">
-                <img src="https://via.placeholder.com/600x300" alt="Promo Space 3" class="carousel-image">
+            <div class="carousel" id="carousel">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 1">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 2">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 3">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 4">
+                <img src="https://via.placeholder.com/300" alt="Promo Space 5">
             </div>
             <button class="carousel-btn next" id="next-btn">&#10095;</button>
         </div>
@@ -27,12 +168,6 @@
         <div class="promo-description">
             <h2>Description of the Promo Space</h2>
             <p>Our promo space offers a unique opportunity for exposure. Whether you're an artist, brand, or influencer, this is the perfect place to get noticed. With high foot traffic and ideal placement, you'll be able to reach a wide audience and increase visibility.</p>
-        </div>
-
-        <!-- Social Media Link -->
-        <div class="social-media">
-            <h3>Follow Us:</h3>
-            <a href="https://www.instagram.com" target="_blank">Instagram</a>
         </div>
 
         <!-- Booking Form -->
@@ -49,7 +184,6 @@
             <label for="message">Additional Message (Optional):</label>
             <textarea id="message" name="message" placeholder="Any special requests or notes?"></textarea>
 
-            <!-- Total Price -->
             <div class="total-price">
                 <h4>Total Price: $500</h4>
             </div>
@@ -58,27 +192,34 @@
         </form>
     </div>
 
-    <!-- JavaScript for carousel functionality -->
     <script>
+        const carousel = document.getElementById('carousel');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-        const carousel = document.querySelector('.carousel');
-        let scrollPosition = 0;
+
+        let scrollAmount = 0;
+        const scrollStep = 310; // Width of the images (300px) + gap (10px)
 
         prevBtn.addEventListener('click', () => {
-            scrollPosition -= 600; // Adjust this value to match the width of your images
-            if (scrollPosition < 0) {
-                scrollPosition = (carousel.scrollWidth - carousel.offsetWidth); // Loop back to the last image
+            scrollAmount -= scrollStep;
+            if (scrollAmount < 0) {
+                scrollAmount = carousel.scrollWidth - carousel.clientWidth; // Loop to the end
             }
-            carousel.style.transform = `translateX(-${scrollPosition}px)`;
+            carousel.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         });
 
         nextBtn.addEventListener('click', () => {
-            scrollPosition += 600; // Adjust this value to match the width of your images
-            if (scrollPosition >= carousel.scrollWidth) {
-                scrollPosition = 0; // Loop back to the first image
+            scrollAmount += scrollStep;
+            if (scrollAmount >= carousel.scrollWidth) {
+                scrollAmount = 0; // Loop to the start
             }
-            carousel.style.transform = `translateX(-${scrollPosition}px)`;
+            carousel.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
