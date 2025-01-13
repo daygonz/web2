@@ -190,8 +190,13 @@
         <h4>Total Price: $50</h4>
     </div>
 
-    <!-- Submit Button -->
-    <button type="submit">Request booking</button>
+   <!-- Stripe Buy Button -->
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button
+            class="stripe-button"
+            buy-button-id="buy_btn_1QgoVyRrjDlf0NAY8Ri2tHkz"
+            publishable-key="pk_test_51QgZymRrjDlf0NAY8XCnL5c3WxGsgj0T02VyGPOZfwzjcRmzf58IAmLtiS6YlcdKMSJMvjCzuKbtQPMoe7Mqhifr00JGzRjRNf">
+        </stripe-buy-button>
 </form>
 
 
